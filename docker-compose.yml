@@ -3,7 +3,7 @@ version: '3'
 services:
   mysql:
     image: mysql:latest
-    container_name: Los_Notas_DB
+    container_name: ${DB_HOST}
     environment:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
