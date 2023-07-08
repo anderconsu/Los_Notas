@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: Los_Notas_DB
+    environment:
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    ports:
+      - ${DB_PORT}:3306
+    volumes:
+      - ./dbfiles:/var/lib/mysql
+      - ./mysql/LosNotasScript.sql:/docker-entrypoint-initdb.d/LosNotasScript.sql
+      - ./mysql/LosNotas_Data.sql:/docker-entrypoint-initdb.d/2LosNotas_Data.sql
+    networks:
+      - app-network
+  app:
+    build: .
+    container_name: ${APP_HOST}
+    ports:
+      - ${APP_PORT}:3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+  
+networks:
+  app-network:
+    driver: bridge
