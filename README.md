@@ -9,9 +9,16 @@ Las notas tienen;
 - 1 categoria
 - Flag oculto | Máximo 10 carácteres
 ***
+### Requisitos
+- Tener docker instalado
 
 ## Instalación
-    **PENDIENTE**
+    1. Clonar el repositorio
+    2. Crear archivo .env basandose en el ya proporcionado
+    3. `docker compose up` para iniciarlo
+    4. Acceder en el navegador con el puerto especificado  
+
+**PENDIENTE**
 
 ***
 
@@ -31,9 +38,17 @@ Notes have the following attributes:
 - 1 category
 - Hidden flag | Maximum 10 characters
 ***
+## Requirements
 
+- Have Docker installed
 ## Installation
-    **PENDING**
+    1. Clone the repository
+    2. Create a .env file based on the provided one
+    3. Run `docker compose up` to start it
+    4. Access it in the browser using the specified port
+
+
+**PENDING**
 
 ***
 
@@ -53,9 +68,18 @@ Oharrek hurrengo atributuak dute:
 - 1 kategoria
 - Isiltasun bandera | Gehienez 10 karaktere
 ***
+## Eskakizunak
 
+- Docker instalatuta izatea
 ## Instalazioa
-    **GAINETIK EGONGO**
+
+    1. Errepositorioa klonatu
+    2. .env fitxategia sortu jatorrizkoa erabiliz
+    3. `docker compose up` exekutatu hasieratzeko
+    4. Sar zaitez nabigatzailean zehaztutako ataka erabiliz
+
+
+**GAINETIK EGONGO**
 
 ***
 
