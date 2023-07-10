@@ -1,12 +1,14 @@
 import Client from "../models/client.js";
+import Sequelize from "sequelize";
 
 class ClientController {
-  createClient() {
-    async (req, res) => {
+  async createClientView(req, res){
+    res.render("client/signup");
+}
+  async createClient(req, res) {
       try {
-        const { username, name, lastname, password, password_repeat } =
-          req.body;
-
+        let { username, name, lastname, password, password_repeat } = req.body;
+        console.log(req.body);
         if (password !== password_repeat) {
           let errorItem = new Sequelize.ValidationErrorItem({
             message: "Las contraseñas no coinciden, joder!",
@@ -22,7 +24,6 @@ class ClientController {
           lastname,
           password,
         });
-
         res.status(201).json(client);
       } catch (error) {
         if (error instanceof Sequelize.ValidationError) {
@@ -41,13 +42,10 @@ class ClientController {
         } else {
           error.message = "Error desconocido al registrarse";
         }
-        res.render("usuario/register", { error: error.message });
+        
       }
-    };
   }
-  async createClientView(req, res){
-      res.render("client/signup");
-  }
+  
   
   updateClient() {
     async (req, res) => {
