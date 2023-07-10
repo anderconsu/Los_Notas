@@ -1,4 +1,4 @@
-import connection from "../config/sequelize.js";
+import connection from "../config/sequalize.js";
 import Sequelize from "sequelize";
 
 const Category = connection.define(

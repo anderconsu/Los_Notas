@@ -1,4 +1,4 @@
-import connection from "../config/sequelize.js";
+import connection from "../config/sequalize.js";
 import Sequelize from "sequelize";
 import Client from "./client.js";
 import Category from "./category.js";

@@ -45,11 +45,10 @@ class ClientController {
       }
     };
   }
-  createClientView(){
-    async (req, res) => {
-    res.render("client/signup");
-    }
+  async createClientView(req, res){
+      res.render("client/signup");
   }
+  
   updateClient() {
     async (req, res) => {
       try {
