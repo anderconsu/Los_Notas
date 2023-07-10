@@ -1,0 +1,22 @@
+extend ../layout
+block content
+    form(action="/client/singup", method="post") 
+        label(for="username") User Name
+        input(type="text", name="username", id="username")
+        br
+        label(for="name") Name
+        input(type="text", name="name", id="name")
+        br
+        label(for="lastname") Last Name
+        input(type="text", name="lastname", id="lastname")
+        br
+        label(for="password") Password
+        input(type="password", name="password", id="password")
+        br
+        label(for="password_repeat") Repetir contraseña
+        input(type="password", name="password_repeat", id="password_repeat")
+        br
+        input(type="submit", value="Registrar")
+        br
+        if error 
+        p= error
