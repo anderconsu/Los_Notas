@@ -2,7 +2,6 @@ import Note from "../models/note.js";
 
 class NoteController {
     constructor(){
-
     }
     createNote(){
         async (req, res) => {
