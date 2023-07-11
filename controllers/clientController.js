@@ -18,7 +18,7 @@ class ClientController {
           });
           throw new Sequelize.ValidationError("", [errorItem]);
         }
-        let hash = await bcrypt.hash(password, 11);
+        let hash = await bcrypt.hash(password, 10);
 
         const client = await Client.create({
           username,
