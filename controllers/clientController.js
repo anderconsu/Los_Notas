@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 class ClientController {
   async createClientView(req, res){
     res.render("client/signup");
-}
+  }
   async createClient(req, res) {
       try {
         let { username, name, lastname, password, password_repeat } = req.body;
@@ -48,7 +48,32 @@ class ClientController {
       }
   }
   
-  
+  async createLoginView(req, res){
+    res.render("client/login");
+  }
+
+  async verifyLogin (req, res){
+    try {
+      let { username, password } = req.body;
+      const client = await Client.findOne({
+        where: {
+          username,
+        },
+      })
+      if (!client){
+        throw new Error("No existe el usuario");
+      }else{
+        if (await bcrypt.compare(password, client.password)) {
+          res.json(client);
+        } else {
+          throw new Error("Contraseña incorrecta");
+        }
+      }
+    }catch (error) {
+      console.log(error)
+      res.status(401).redirect("/client/signup");
+    }
+  }
   updateClient() {
     async (req, res) => {
       try {
