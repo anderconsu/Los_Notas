@@ -1,5 +1,6 @@
 import Client from "../models/client.js";
 import Sequelize from "sequelize";
+import bcrypt from "bcrypt";
 
 class ClientController {
   async createClientView(req, res){
@@ -17,12 +18,13 @@ class ClientController {
           });
           throw new Sequelize.ValidationError("", [errorItem]);
         }
+        let hash = await bcrypt.hash(password, 11);
 
         const client = await Client.create({
           username,
           name,
           lastname,
-          password,
+          password:hash,
         });
         res.status(201).json(client);
       } catch (error) {
