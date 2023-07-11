@@ -1,74 +1,116 @@
 import Note from "../models/note.js";
+import Client from "../models/client.js";
+import Category from "../models/category.js";
 
 class NoteController {
-    constructor(){
+    async getallNotes(req, res) {
+        // mix function ===
+        function shuffleArray(array) {
+            // Método para mezclar un array
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        // ===================
+        //
+        try {
+            let notes = await Note.findAll({
+                include: [
+                    {
+                        model: Client,
+                        attributes: ["id", "username"],
+                    },
+                    {
+                        model: Category,
+                        attributes: ["name"],
+                    },
+                ],
+                attributes: ["title", "content"],
+            });
+            //mix all notes randomly
+            notes = shuffleArray(notes);
+            res.json(notes);
+            return notes;
+        } catch (error) {
+            res.status(500).json({ error: "Error getting all notes" });
+        }
     }
-    createNote(){
+    async renderAllNotes(req, res) {
+        let notes = await this.getallNotes(req, res);
+        res.render("test/testdata", { notes });
+    }
+
+    // ========================= COSAS GPT DAVID =================
+    createNote() {
         async (req, res) => {
             try {
-                const { title, content, flag, client_id, category_id } = req.body;
-        
+                const { title, content, flag, client_id, category_id } =
+                    req.body;
+
                 const note = await Note.create({
-                title,
-                content,
-                flag,
-                client_id,
-                category_id,
+                    title,
+                    content,
+                    flag,
+                    client_id,
+                    category_id,
                 });
-        
+
                 res.status(201).json(note);
             } catch (error) {
                 res.status(500).json({ error: "Error creating note" });
             }
-        }
+        };
     }
-    updateNote(){
+    updateNote() {
         async (req, res) => {
             try {
                 const { id } = req.params;
-                const { title, content, flag, client_id, category_id } = req.body;
+                const { title, content, flag, client_id, category_id } =
+                    req.body;
 
                 const note = await Note.findByPk(id);
 
                 if (note) {
-                note.title = title;
-                note.content = content;
-                note.flag = flag;
-                note.client_id = client_id;
-                note.category_id = category_id;
+                    note.title = title;
+                    note.content = content;
+                    note.flag = flag;
+                    note.client_id = client_id;
+                    note.category_id = category_id;
 
-                await note.save();
+                    await note.save();
 
-                res.json(note);
+                    res.json(note);
                 } else {
-                res.status(404).json({ error: "Note not found" });
+                    res.status(404).json({ error: "Note not found" });
                 }
             } catch (error) {
                 res.status(500).json({ error: "Error updating note" });
             }
-        }
+        };
     }
-    deleteNote(){
+    deleteNote() {
         async (req, res) => {
             try {
                 const { id } = req.params;
-        
+
                 const note = await Note.findByPk(id);
-        
+
                 if (note) {
-                await note.destroy();
-        
-                res.sendStatus(204);
+                    await note.destroy();
+
+                    res.sendStatus(204);
                 } else {
-                res.status(404).json({ error: "Note not found" });
+                    res.status(404).json({ error: "Note not found" });
                 }
             } catch (error) {
                 res.status(500).json({ error: "Error deleting note" });
             }
-        }
+        };
     }
 }
 
-let newNoteController = new NoteController
+let newNoteController = new NoteController();
 
-export default newNoteController
+export default newNoteController;
