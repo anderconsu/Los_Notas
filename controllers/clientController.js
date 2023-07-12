@@ -68,6 +68,8 @@ class ClientController {
         } else {
           throw new Error("Contraseña incorrecta");
         }
+          // Guardar la sesión
+          req.session.client = client;
       }
     }catch (error) {
       console.log(error)
