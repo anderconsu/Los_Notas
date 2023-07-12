@@ -8,5 +8,5 @@ const router = express.Router();
 // router.put("/:id", noteController.updateNote);
 // router.delete("/:id", noteController.deleteNote);
 // Otras rutas de notas...
-router.get("/all", noteController.getallNotes);
+router.get("/all", (req, res) => {noteController.renderAllNotes(req, res)});
 export default router;
