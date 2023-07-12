@@ -1,6 +1,7 @@
 import Client from "../models/client.js";
 import Sequelize from "sequelize";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 class ClientController {
   async createClientView(req, res){
@@ -47,13 +48,28 @@ class ClientController {
         
       }
   }
-  
+  async createClientApi(req, res){    
+    try {
+      let { username, password, password_repeat } = req.body;
+      if (password !== password_repeat) {
+        return res.status(400).json({
+          error: "Las contraseñas no coinciden",
+        });
+      }
+      let hash = await bcrypt.hash(password, 11);
+      let result = await Usuario.create({ username, password: hash });
+      return res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        error: "Error desconocido al registrarse",
+      });
+    }
+  }
   async createLoginView(req, res){
     res.render("client/login");
   }
-
   async verifyLogin (req, res){
-    console.log(req.session)
     try {
       let { username, password } = req.body;
       const client = await Client.findOne({
@@ -79,7 +95,38 @@ class ClientController {
       res.status(401).redirect("/client/signup");
     }
   }
-  updateClient() {
+  async verifyLoginApi (req, res){
+    try {
+      let { username, password } = req.body;
+      let client = await Usuario.findOne({ where: { username } });
+      if (!client) {
+        return res.status(400).json({
+          error: "El usuario no existe",
+        });
+      }
+      let hash = client.password;
+      let iguales = await bcrypt.compare(password, hash);
+      if (!iguales) {
+        return res.status(401).json({
+          error: "La contraseña no es correcta",
+        });
+      }
+
+      // Generar token JWT
+      let payload = { username };
+      let token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+      return res.status(200).json({
+        token,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        error: "Error desconocido al iniciar sesión",
+      });
+    }
+  }
+/*   updateClient() {
     async (req, res) => {
       try {
         const { id } = req.params;
@@ -122,7 +169,7 @@ class ClientController {
         res.status(500).json({ error: "Error deleting user" });
       }
     };
-  }
+  } */
 }
 
 let newClientController = new ClientController();
