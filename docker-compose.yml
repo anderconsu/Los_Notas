@@ -14,7 +14,7 @@ services:
     volumes:
       - ./dbfiles:/var/lib/mysql
       - ./mysql/LosNotasScript.sql:/docker-entrypoint-initdb.d/1LosNotasScript.sql
-      # - ./mysql/LosNotas_Data.sql:/docker-entrypoint-initdb.d/2LosNotas_Data.sql
+      - ./mysql/LosNotas_Data.sql:/docker-entrypoint-initdb.d/2LosNotas_Data.sql
     networks:
       - app-network
   app:
