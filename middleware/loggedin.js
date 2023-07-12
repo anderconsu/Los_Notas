@@ -1,16 +1,15 @@
 import jwt from "jsonwebtoken";
 
 const loggedInMiddleware = (req, res, next) => {
-    console.log(req.session)
     if (req.session.client) {
-        console.log(true)
+        console.log(true);
         // El usuario está logueado, continuar con la siguiente función
         next();
     } else {
         // El usuario no está logueado, redirigir al login
         res.redirect("/client/login");
     }
-}
+};
 
 const jwtMiddleware = (req, res, next) => {
     try {
@@ -24,6 +23,6 @@ const jwtMiddleware = (req, res, next) => {
             error: "No está autorizado",
         });
     }
-}
+};
 
 export { loggedInMiddleware, jwtMiddleware };

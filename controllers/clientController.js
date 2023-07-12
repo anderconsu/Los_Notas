@@ -53,6 +53,7 @@ class ClientController {
   }
 
   async verifyLogin (req, res){
+    console.log(req.session)
     try {
       let { username, password } = req.body;
       const client = await Client.findOne({
@@ -64,12 +65,14 @@ class ClientController {
         throw new Error("No existe el usuario");
       }else{
         if (await bcrypt.compare(password, client.password)) {
+          // Guardar la sesión
+          req.session.client = client;
+          // Redirigir al usuario
           res.json(client);
         } else {
           throw new Error("Contraseña incorrecta");
         }
-          // Guardar la sesión
-          req.session.client = client;
+
       }
     }catch (error) {
       console.log(error)
