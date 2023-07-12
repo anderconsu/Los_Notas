@@ -10,6 +10,7 @@ const Note = connection.define(
       type: Sequelize.INTEGER.UNSIGNED,
       primaryKey: true,
       autoIncrement: true,
+      UNSIGNED: true,
     },
     title: {
       type: Sequelize.STRING(50),

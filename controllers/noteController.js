@@ -27,7 +27,7 @@ class NoteController {
                         attributes: ["name"],
                     },
                 ],
-                attributes: ["title", "content"],
+                attributes: ["id", "title", "content"],
             }); 
             //mix all notes randomly
             notes = shuffleArray(notes);
@@ -40,6 +40,54 @@ class NoteController {
     async renderAllNotes(req, res) {
         let notes = await this.getallNotes(req, res);
         res.render("test/testdata", { notes });
+    }
+
+    async getSpecificNote(req, res) {
+        try {
+        console.log(req);
+        const { id } = req.params;
+        console.log(id);
+        const note = await Note.findByPk(id, {
+            include: [
+                {
+                    model: Client,
+                    attributes: ["id", "username"],
+                },
+                {
+                    model: Category,
+                    attributes: ["name"],
+                },
+            ],
+            attributes: ["id", "title", "content"],
+        });
+        res.json(note);
+        } catch (error) {
+        res.status(500).json({ error: "Error getting specific note" });
+        }
+    }
+
+    async getByCategory(req, res) {
+        try {
+            const { id } = req.params;
+            console.log(id);
+            const category = await Category.findByPk(id,
+                {
+                    include: [
+                        {
+                            model: Client,
+                            attributes: ["id", "username"],
+                        },
+                        {
+                            model: Note,
+                            attributes: ["id", "title", "content"],
+                        },
+                    ],
+                    attributes: ["id", "name"],
+                });
+            res.json(category);
+        } catch (error) {
+            res.status(500).json({ error: "Error getting specific note" });
+        }
     }
 
     // ========================= COSAS GPT DAVID =================
