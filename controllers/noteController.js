@@ -31,8 +31,8 @@ class NoteController {
             }); 
             //mix all notes randomly
             notes = shuffleArray(notes);
-            //res.json(notes);
-            return notes;
+            res.json(notes);
+            //return notes;
         } catch (error) {
             res.status(500).json({ error: "Error getting all notes" });
         }
