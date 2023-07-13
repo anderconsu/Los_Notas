@@ -96,9 +96,10 @@ class ClientController {
     }
   }
   async verifyLoginApi (req, res){
+    console.log(req.body);
     try {
       let { username, password } = req.body;
-      let client = await Usuario.findOne({ where: { username } });
+      let client = await Client.findOne({ where: { username } });
       if (!client) {
         return res.status(400).json({
           error: "El usuario no existe",
@@ -106,6 +107,7 @@ class ClientController {
       }
       let hash = client.password;
       let iguales = await bcrypt.compare(password, hash);
+      console.log(iguales);
       if (!iguales) {
         return res.status(401).json({
           error: "La contraseña no es correcta",

@@ -6,7 +6,7 @@ import noteController from "../controllers/noteController.js";
 
 const router = express.Router();
 
-router.get("/client/login", (req, res) => {newClientController.verifyLoginApi(req, res)});
+router.post("/client/login", (req, res) => {newClientController.verifyLoginApi(req, res)});
 router.get("/note", (req, res) => {noteController.getallNotes(req, res)});
 router.get("/note/:id", (req, res) => {noteController.getSpecificNote(req, res)});
 router.get("/note/category/:id", (req, res) => {noteController.getByCategory(req, res)});
