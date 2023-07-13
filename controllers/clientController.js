@@ -27,7 +27,7 @@ class ClientController {
           lastname,
           password:hash,
         });
-        res.status(201).json(client);
+        res.status(201).redirect("/client/login");
       } catch (error) {
         if (error instanceof Sequelize.ValidationError) {
           console.log("errors", error.errors);
@@ -84,7 +84,7 @@ class ClientController {
           // Guardar la sesión
           req.session.client = client;
           // Redirigir al usuario
-          res.json(client);
+          res.redirect("/");
         } else {
           throw new Error("Contraseña incorrecta");
         }
