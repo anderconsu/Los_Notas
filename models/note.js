@@ -10,6 +10,7 @@ const Note = connection.define(
       type: Sequelize.INTEGER.UNSIGNED,
       primaryKey: true,
       autoIncrement: true,
+      UNSIGNED: true,
     },
     title: {
       type: Sequelize.STRING(50),
@@ -36,5 +37,6 @@ const Note = connection.define(
 
 Note.belongsTo(Client, { foreignKey: "client_id" });
 Note.belongsTo(Category, { foreignKey: "category_id" });
+Category.hasMany(Note, { foreignKey: "category_id" });
 
 export default Note;
