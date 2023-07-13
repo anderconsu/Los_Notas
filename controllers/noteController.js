@@ -38,6 +38,39 @@ class NoteController {
             res.status(500).json({ error: "Error getting all notes" });
         }
     }
+    async getallNotesApi(req, res) {
+        // mix function ===
+        function shuffleArray(array) {
+            // Método para mezclar un array
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        // ===================
+        //
+        try {
+            let notes = await Note.findAll({
+                include: [
+                    {
+                        model: Client,
+                        attributes: ["id", "username"],
+                    },
+                    {
+                        model: Category,
+                        attributes: ["name"],
+                    },
+                ],
+                attributes: ["id", "title", "content"],
+            }); 
+            //mix all notes randomly
+            notes = shuffleArray(notes);
+            res.json(notes);
+        } catch (error) {
+            res.status(500).json({ error: "Error getting all notes" });
+        }
+    }
     async renderAllNotes(req, res) {
         let notes = await this.getallNotes(req, res);
         res.render("test/testdata", { notes });
