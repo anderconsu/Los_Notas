@@ -10,4 +10,6 @@ const router = express.Router();
 // router.delete("/:id", noteController.deleteNote);
 // Otras rutas de notas...
 router.get("/all",loggedInMiddleware, (req, res) => {noteController.renderAllNotes(req, res)});
+router.get("/id/:id", loggedInMiddleware, (req, res) => {noteController.getSpecificNote(req, res)});
+router.get("/category/:id", loggedInMiddleware, (req, res) => {noteController.renderByCategory(req, res)});
 export default router;
