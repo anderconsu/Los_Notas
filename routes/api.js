@@ -6,10 +6,10 @@ import noteController from "../controllers/noteController.js";
 
 const router = express.Router();
 
-router.post("/client", (req, res) => {newClientController.verifyLogin(req, res)});
-router.post("/note", (req, res) => {noteController.getallNotes(req, res)});
-router.post("/note/:id", (req, res) => {noteController.getSpecificNote(req, res)});
-router.post("/note/category/:id", (req, res) => {noteController.getByCategory(req, res)});
+router.get("/client", (req, res) => {newClientController.verifyLogin(req, res)});
+router.get("/note", (req, res) => {noteController.getallNotes(req, res)});
+router.get("/note/:id", (req, res) => {noteController.getSpecificNote(req, res)});
+router.get("/note/category/:id", (req, res) => {noteController.getByCategory(req, res)});
 
 
 

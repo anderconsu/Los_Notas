@@ -44,9 +44,7 @@ class NoteController {
 
     async getSpecificNote(req, res) {
         try {
-        console.log(req);
         const { id } = req.params;
-        console.log(id);
         const note = await Note.findByPk(id, {
             include: [
                 {
@@ -74,12 +72,14 @@ class NoteController {
                 {
                     include: [
                         {
-                            model: Client,
-                            attributes: ["id", "username"],
-                        },
-                        {
                             model: Note,
                             attributes: ["id", "title", "content"],
+                            include: [
+                                {
+                                    model: Client,
+                                    attributes: ["id", "username"],
+                                }
+                            ]
                         },
                     ],
                     attributes: ["id", "name"],
