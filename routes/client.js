@@ -1,12 +1,16 @@
-import express from "express";
+import {Router} from "express";
 import newClientController from "../controllers/clientController.js";
 
-const router = express.Router();
+const router = Router();
 
 // Rutas relacionadas con usuarios
-router.post("/signup", newClientController.createClient);
+router.post("/signup", (req, res) => {newClientController.createClient(req, res)});
 // Otras rutas de usuarios...
 router.get("/signup", (req, res) => {newClientController.createClientView(req, res)});
+
+//Router login
+router.get("/login", (req, res) => {newClientController.createLoginView(req, res)});
+router.post("/login", (req, res) => {newClientController.verifyLogin(req, res)});
 
 export default router;
 

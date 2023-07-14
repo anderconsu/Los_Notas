@@ -1,6 +1,6 @@
 extend ../layout
 block content
-    form(action="/client/singup", method="post") 
+    form(action="/client/signup", method="post") 
         label(for="username") User Name
         input(type="text", name="username", id="username")
         br
@@ -17,6 +17,4 @@ block content
         input(type="password", name="password_repeat", id="password_repeat")
         br
         input(type="submit", value="Registrar")
-        br
-        if error 
-        p= error
+    

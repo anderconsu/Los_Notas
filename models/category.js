@@ -7,13 +7,15 @@ const Category = connection.define(
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
+      UNSIGNED: true,
     },
     name: {
       type: Sequelize.STRING(45),
       allowNull: false,
+      unique: true,
     },
   },
-  { indexes: [{ unique: true, fields: ["name"] }] }
 );
 
 export default Category;

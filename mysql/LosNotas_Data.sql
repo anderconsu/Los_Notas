@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
 --
--- Host: vpn.cloudconsu.com    Database: dbLosNotas
+-- Host: localhost    Database: dbLosNotas
 -- ------------------------------------------------------
 -- Server version	8.0.33
 
@@ -21,7 +21,7 @@
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (3,'Important'),(2,'Personal'),(1,'Work');
+INSERT INTO `category` VALUES (10,'Art'),(9,'Books'),(3,'Fashion'),(4,'Food'),(8,'Health'),(7,'Movies'),(6,'Music'),(1,'Sports'),(2,'Technology'),(5,'Travel');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'user1','John','Doe','password1'),(2,'user2','Jane','Smith','password2'),(3,'user3','Michael','Johnson','password3'),(4,'john.doe','John','Doe','password123'),(5,'jane.smith','Jane','Smith','password456'),(6,'mike.wilson','Mike','Wilson','password789');
+INSERT INTO `client` VALUES (1,'user1','John','Doe','password1','user'),(2,'user2','Jane','Smith','password2','user'),(3,'user3','Michael','Johnson','password3','user'),(4,'user4','Emily','Brown','password4','user'),(5,'user5','David','Wilson','password5','user');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `note` WRITE;
 /*!40000 ALTER TABLE `note` DISABLE KEYS */;
-INSERT INTO `note` VALUES (1,'Meeting','Meeting with the team at 2 PM.','PepaPig',1,1),(2,'Task','Complete the report by tomorrow.','Vacio',1,1),(3,'Reminder','Buy groceries on the way home.','urgent',1,2),(4,'Task','Submit the project proposal.','Vacio',2,1),(5,'Appointment','Dentist appointment at 10 AM.','Vacio',2,3),(6,'Idea','New business idea for discussion.','Vacio',2,2),(7,'Reminder','Pay the utility bills.','Vacio',3,3),(8,'Task','Prepare for the presentation.','Vacio',3,1),(9,'Idea','Brainstorming session for new project.','Vacio',3,2),(10,'LOS JAJAS','No me cuentes movidas pavo','Carricoche',1,3);
+INSERT INTO `note` VALUES (1,'Note 1','This is the content of note 1 for user 1.',NULL,1,1),(2,'Note 2','This is the content of note 2 for user 1.',NULL,1,2),(3,'Note 1','This is the content of note 1 for user 2.',NULL,2,3),(4,'Note 2','This is the content of note 2 for user 2.',NULL,2,4),(5,'Note 1','This is the content of note 1 for user 3.',NULL,3,5),(6,'Note 2','This is the content of note 2 for user 3.',NULL,3,6),(7,'Note 1','This is the content of note 1 for user 4.',NULL,4,7),(8,'Note 2','This is the content of note 2 for user 4.',NULL,4,8),(9,'Note 1','This is the content of note 1 for user 5.',NULL,5,9),(10,'Note 2','This is the content of note 2 for user 5.',NULL,5,10);
 /*!40000 ALTER TABLE `note` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-08 10:29:52
+-- Dump completed on 2023-07-12 10:59:37
