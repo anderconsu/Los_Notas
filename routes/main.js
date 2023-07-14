@@ -1,5 +1,4 @@
 import express from "express";
-//import homeRoutes from "./home.js";
 import notes from "../controllers/noteController.js";
 import clientRoutes from "./client.js";
 import noteRoutes from "./note.js";
@@ -10,7 +9,7 @@ const router = express.Router();
 
 
 // Rutas principales
-//router.use("/", homeRoutes);
+
 router.get("/", (req, res) => {notes.renderAllNotes(req, res)});
 
 router.use("/client",clientRoutes);
