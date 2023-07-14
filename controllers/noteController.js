@@ -1,6 +1,7 @@
 import Note from "../models/note.js";
 import Client from "../models/client.js";
 import Category from "../models/category.js";
+import session from "express-session";
 import { render } from "pug";
 
 class NoteController {
@@ -187,28 +188,32 @@ class NoteController {
         let notes = await this.getByCategory(req, res);
         res.render("test/testdata", { notes });
     }
-
-    // ========================= COSAS GPT DAVID =================
-    createNote() {
-        async (req, res) => {
+    
+    async renderCreateNote(req, res) {
+        res.render("note/create");
+    }
+    async createNote(req, res) {
             try {
-                const { title, content, flag, client_id, category_id } =
-                    req.body;
+                console.log(req.process.session);
+                //let { title, content, category_id, flag } = req.body;
+                //const client_id = req.process.session.client.id;
+                //console.log(client_id);
 
-                const note = await Note.create({
-                    title,
-                    content,
-                    flag,
-                    client_id,
-                    category_id,
-                });
+                // const note = await Note.create({
+                //     title,
+                //     content,
+                //     flag,
+                //     client_id,
+                //     category_id,
+                // });
 
-                res.status(201).json(note);
+                //res.status(201).json(note);
             } catch (error) {
                 res.status(500).json({ error: "Error creating note" });
             }
-        };
     }
+
+    // ========================= COSAS GPT DAVID =================
     updateNote() {
         async (req, res) => {
             try {
