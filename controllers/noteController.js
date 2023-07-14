@@ -216,20 +216,18 @@ class NoteController {
     }
     async createNote(req, res) {
             try {
-                console.log(req.process.session);
-                //let { title, content, category_id, flag } = req.body;
-                //const client_id = req.process.session.client.id;
-                //console.log(client_id);
+                let { title, content, category_id, flag } = req.body;
+                let client_id = req.session.client.id;
 
-                // const note = await Note.create({
-                //     title,
-                //     content,
-                //     flag,
-                //     client_id,
-                //     category_id,
-                // });
+                const note = await Note.create({
+                    title,
+                    content,
+                    flag,
+                    client_id,
+                    category_id,
+                });
 
-                //res.status(201).json(note);
+                res.status(201).json(note);
             } catch (error) {
                 res.status(500).json({ error: "Error creating note" });
             }

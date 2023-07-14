@@ -79,6 +79,7 @@ class ClientController {
       if (!client){
         throw new Error("No existe el usuario");
       }else{
+        console.log(client);
         if (await bcrypt.compare(password, client.password)) {
           // Guardar la sesión
           req.session.client = client;
