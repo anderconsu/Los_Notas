@@ -191,20 +191,26 @@ class NoteController {
     async deleteNote(req, res) {
         try {
             const { id } = req.params;
-    
             const note = await Note.findByPk(id);
     
             if (note) {
-                await note.destroy();
-                res.json({ message: "Note deleted successfully" });
+                const clientId = req.session.client.id;
+                const isAdmin = req.session.client.rol === "admin";
+    
+                // Check if the user is the creator of the note or an admin
+                if (note.client_id === clientId || isAdmin) {
+                    await note.destroy();
+                    res.json({ message: "Note deleted successfully" });
+                } else {
+                    res.status(403).json({ error: "You are not authorized to delete this note" });
+                }
             } else {
                 res.status(404).json({ error: "Note not found" });
             }
-            } catch (error) {
+        } catch (error) {
             res.status(500).json({ error: "Error deleting note" });
-            }
         }
-    
+    }
     async renderCreateNote(req, res) {
         res.render("note/create");
     }
@@ -227,35 +233,6 @@ class NoteController {
             } catch (error) {
                 res.status(500).json({ error: "Error creating note" });
             }
-    }
-
-    // ========================= COSAS GPT DAVID =================
-    updateNote() {
-        async (req, res) => {
-            try {
-                const { id } = req.params;
-                const { title, content, flag, client_id, category_id } =
-                    req.body;
-
-                const note = await Note.findByPk(id);
-
-                if (note) {
-                    note.title = title;
-                    note.content = content;
-                    note.flag = flag;
-                    note.client_id = client_id;
-                    note.category_id = category_id;
-
-                    await note.save();
-
-                    res.json(note);
-                } else {
-                    res.status(404).json({ error: "Note not found" });
-                }
-            } catch (error) {
-                res.status(500).json({ error: "Error updating note" });
-            }
-        };
     }
 }
 
