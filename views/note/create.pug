@@ -1,0 +1,16 @@
+extends ../layout
+block content
+  form(action="/note/create", method="post")
+    label(for="title") Titulo
+    input(type="text", name="title" id="title")
+    br
+    label(for="content") Contenido
+    input(type="text", name="content" id="content")
+    br
+    label(for="category_id") Categoria
+    input(type="text", name="category_id" id="category_id")
+    br
+    label(for="flag") Etiquetas
+    input(type="text", name="flag" id="flag")
+    br
+    input(type="submit", value="Create")

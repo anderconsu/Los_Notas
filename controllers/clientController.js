@@ -10,7 +10,6 @@ class ClientController {
   async createClient(req, res) {
       try {
         let { username, name, lastname, password, password_repeat } = req.body;
-        console.log(req.body);
         if (password !== password_repeat) {
           let errorItem = new Sequelize.ValidationErrorItem({
             message: "Las contraseñas no coinciden, joder!",
