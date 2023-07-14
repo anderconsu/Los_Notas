@@ -187,6 +187,22 @@ class NoteController {
         let notes = await this.getByCategory(req, res);
         res.render("test/testdata", { notes });
     }
+    async deleteNote(req, res) {
+        try {
+            const { id } = req.params;
+    
+            const note = await Note.findByPk(id);
+    
+            if (note) {
+                await note.destroy();
+                res.json({ message: "Note deleted successfully" });
+            } else {
+                res.status(404).json({ error: "Note not found" });
+            }
+            } catch (error) {
+            res.status(500).json({ error: "Error deleting note" });
+            }
+        }
 
     // ========================= COSAS GPT DAVID =================
     createNote() {
@@ -233,25 +249,6 @@ class NoteController {
                 }
             } catch (error) {
                 res.status(500).json({ error: "Error updating note" });
-            }
-        };
-    }
-    deleteNote() {
-        async (req, res) => {
-            try {
-                const { id } = req.params;
-
-                const note = await Note.findByPk(id);
-
-                if (note) {
-                    await note.destroy();
-
-                    res.sendStatus(204);
-                } else {
-                    res.status(404).json({ error: "Note not found" });
-                }
-            } catch (error) {
-                res.status(500).json({ error: "Error deleting note" });
             }
         };
     }
