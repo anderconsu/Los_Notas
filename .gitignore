@@ -134,4 +134,3 @@ dist
 # NUESTROS IGNORES
 dbfiles/
 .vscode
-test/
