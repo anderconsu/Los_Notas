@@ -42,17 +42,6 @@ class NoteController {
         }
     }
     async getallNotesApi(req, res) {
-        // mix function ===
-        function shuffleArray(array) {
-            // Método para mezclar un array
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-        // ===================
-        //
         try {
             let notes = await Note.findAll({
                 include: [
@@ -67,8 +56,6 @@ class NoteController {
                 ],
                 attributes: ["id", "title", "content"],
             });
-            //mix all notes randomly
-            notes = shuffleArray(notes);
             res.json(notes);
         } catch (error) {
             res.status(500).json({ error: "Error getting all notes" });
@@ -95,7 +82,7 @@ class NoteController {
                         attributes: ["name"],
                     },
                 ],
-                attributes: ["id", "title", "content"],
+                attributes: ["id", "title", "content", "flag"],
             });
             return note;
         } catch (error) {
@@ -113,10 +100,10 @@ class NoteController {
                     },
                     {
                         model: Category,
-                        attributes: ["name"],
+                        attributes: ["id", "name"],
                     },
                 ],
-                attributes: ["id", "title", "content"],
+                attributes: ["id", "title", "content", "flag"],
             });
             res.json(note);
         } catch (error) {
@@ -144,7 +131,7 @@ class NoteController {
                 include: [
                     {
                         model: Note,
-                        attributes: ["id", "title", "content"],
+                        attributes: ["id", "title", "content", "flag"],
                         include: [
                             {
                                 model: Client,
@@ -155,9 +142,15 @@ class NoteController {
                 ],
                 attributes: ["id", "name"],
             });
+            if (!category) {
+                throw new Error("Category not found");
+            }
             return category;
         } catch (error) {
-            res.status(500).json({ error: "Error getting specific note" });
+            if (error.message === "Category not found") {
+                res.status(404).json({ error: "Category not found" });
+            }
+            res.status(500).json({ error: "Error getting notes by category" });
         }
     }
     async getByCategoryApi(req, res) {
@@ -179,9 +172,15 @@ class NoteController {
                 ],
                 attributes: ["id", "name"],
             });
+            if (!category) {
+                throw new Error("Category not found");
+            }
             res.json(category);
         } catch (error) {
-            res.status(500).json({ error: "Error getting specific note" });
+            if (error.message === "Category not found") {
+                res.status(404).json({ error: "Category not found" });
+            }
+            res.status(500).json({ error: "Error getting notes by category" });
         }
     }
     async renderByCategory(req, res) {
