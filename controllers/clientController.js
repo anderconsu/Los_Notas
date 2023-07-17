@@ -10,8 +10,21 @@ class ClientController {
         try {
             let { username, name, lastname, password, password_repeat } =
                 req.body;
+            if (!username || !name || !lastname || !password || !password_repeat) {
+                throw new Error("All fields are required");
+            }
+            if (username.length < 3) {
+                throw new Error("Username must be at least 3 characters");
+            }
             if (password !== password_repeat) {
                 throw new Error("Passwords do not match");
+            }
+            // Regular expression for password validation
+            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                throw new Error(
+                    "Regex error"
+                );
             }
             const existingClient = await Client.findOne({ username });
             if (existingClient) {
@@ -26,17 +39,23 @@ class ClientController {
             });
             res.status(201).redirect("/client/login");
         } catch (error) {
+            let errorMessage = "";
             console.error("Error creating client:", error);
             // Handle specific errors and send appropriate responses
             if (error.message === "Passwords do not match") {
-                res.status(400).json({ error: "Passwords do not match" });
+                errorMessage = "Las contraseñas no coinciden."
             } else if (error.message === "The username is already taken") {
-                res.status(409).json({
-                    error: "The username is already taken",
-                });
-            } else {
+                errorMessage = "El usuario ya existe."
+            } else if (error.message === "Regex error") {
+                errorMessage = "La contraseña debe tener al menos 8 carácteres, una mayúscula, una minúscula y un número." 
+            } else if (error.message === "All fields are required") {
+                errorMessage = "Todos los campos son obligatorios."
+            }
+            else {
                 res.status(500).json({ error: "Internal Server Error" });
             }
+            console.log("he llegado hasta aqui");
+            res.render(`client/signup`, {errorMessage });
         }
     }
     async createClientApi(req, res) {
