@@ -74,7 +74,7 @@ class ClientController {
             let hash = await bcrypt.hash(password, 11);
             let result = await Usuario.create({ username, password: hash });
             return res.status(200).json(result);
-        } catch (error) {
+        } catch (error) { 
             console.log(error);
             return res.status(500).json({
                 error: "Error desconocido al registrarse",
