@@ -134,7 +134,7 @@ class NoteController {
                 include: [
                     {
                         model: Note,
-                        attributes: ["id", "title", "content", "flag"],
+                        attributes: ["id", "title", "content", "flag", "category_id"],
                         include: [
                             {
                                 model: Client,
@@ -193,8 +193,7 @@ class NoteController {
         
         
      res.render("note/notecategory", { notesAndCategoryObject });
- //res.status(201).json(notes);
- //res.status(201).json(notesAndCategoryObject.category.notes[0].flag);
+ //res.status(201).json(notesAndCategoryObject);
     }
     async deleteNote(req, res) {
         try {

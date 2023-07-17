@@ -7,7 +7,8 @@ html
         nav.navbar
             a.logo(href="/")
                 img.logo-image(src="/assets/notas.jpeg" alt="Logo")
-            h1.navbar-title LOS NOTAS
+            h1.navbar-title 
+                a(href="/") LOS NOTAS
             if session.client
                 ul.menu-list
                     li 
@@ -47,23 +48,25 @@ html
 .body-class
 h1 Categoría: #{notesAndCategoryObject.name}
 .note-cards
-        .note-card
-            br
-            br
-            br
-            a(href="/note/create") +
-        if notesAndCategoryObject.notes.length > 0
-            each note in notesAndCategoryObject.notes
-                .note-card
-                    h2= note.title
-                    p= note.content
-                    p= note.client.name + ' ' + note.client.lastname
-                    p= "@" + note.flag
-                        if session.client.id === note.client.id || isAdmin
-                            form(action=`note/delete/${note.id}`, method="DELETE")
-                                button(type="submit") Borrar
-        else
-            p No hay notas disponibles.
+    .note-card
+        br
+        br
+        br
+        a.agregar(href="/note/create") +
+    if notesAndCategoryObject.notes.length > 0
+        each note in notesAndCategoryObject.notes
+            .note-card(class=`category-${note.category_id}`)
+
+                h2 Etiqueta: #{note.title}
+                p Contenido: #{note.content}
+                if note.flag
+                    p Flag: #{note.flag}
+                p= note.client.name + ' ' + note.client.lastname
+                    if session.client.id === note.client.id || isAdmin
+                        form(action=`note/delete/${note.id}`, method="DELETE")
+                            button(type="submit") Borrar
+    else
+        p No hay notas disponibles.
 
 
 

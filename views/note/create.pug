@@ -7,7 +7,8 @@ html
         nav.navbar
             a.logo(href="/")
                 img.logo-image(src="/assets/notas.jpeg" alt="Logo")
-            h1.navbar-title LOS NOTAS
+            h1.navbar-title 
+                a(href="/") LOS NOTAS
             if session.client
                 ul.menu-list
                     li 
@@ -24,16 +25,29 @@ html
                         a(href="/client/signup") Registro
 
 form.formulario(action="/note/create" method="post")
-  label(for="title") Titulo
-  input.input(type="text" name="title" id="title")
-  br
-  label(for="content") Contenido
-  input.input(type="text" name="content" id="content")
-  br
-  label(for="category_id") Categoria
-  input.input(type="text" name="category_id" id="category_id")
-  br
-  label(for="flag") Etiquetas
-  input.input(type="text" name="flag" id="flag")
-  br
-  input.button(type="submit" value="Create")
+    label(for="title") Titulo
+    input.input(type="text" name="title" id="title")
+    br
+    label(for="content") Contenido
+    textarea.textarea(name="content" id="content" rows="6" cols="50")
+    br
+    label(for="category_id") Categoria
+    select#category_id(name="category_id")
+        option(value="1") Sports
+        option(value="2") Technology
+        option(value="3") Fashion
+        option(value="4") Food
+        option(value="5") Travel
+        option(value="6") Music
+        option(value="7") Movies
+        option(value="8") Health
+        option(value="9") Books
+        option(value="10") Art
+    br
+    label(for="flag") Etiquetas
+    input.input(type="text" name="flag" id="flag")
+    br
+    input.button(type="submit" value="Create")
+
+
+
