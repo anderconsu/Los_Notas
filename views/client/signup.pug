@@ -1,20 +1,37 @@
-extend ../layout
-block content
-    form(action="/client/signup", method="post") 
-        label(for="username") User Name
-        input(type="text", name="username", id="username")
-        br
-        label(for="name") Name
-        input(type="text", name="name", id="name")
-        br
-        label(for="lastname") Last Name
-        input(type="text", name="lastname", id="lastname")
-        br
-        label(for="password") Password
-        input(type="password", name="password", id="password")
-        br
-        label(for="password_repeat") Repetir contraseña
-        input(type="password", name="password_repeat", id="password_repeat")
-        br
-        input(type="submit", value="Registrar")
-    
+doctype html
+html
+    head
+        title Notes
+        link(rel="stylesheet" type="text/css" href="/css/style.css")
+    body
+        nav.navbar
+            a.logo(href="/")
+                img.logo-image(src="https://thumbs.dreamstime.com/b/ejemplo-del-vector-icono-de-la-melod%C3%ADa-nota-musical-para-su-dise%C3%B1o-sitio-web-logotipo-app-ui-131553521.jpg" alt="Logo")
+            h1.navbar-title LOS NOTAS
+            if session.client
+                span.navbar-username= session.client.username
+                a(href="/client/logout") Log Out
+            else
+                ul.menu-list
+                    li
+                        a(href="/") Home
+                    li
+                        a(href="/client/login") Login
+        .body-class
+            form.formulario(action="/client/signup" method="post")
+                label(for="username") User Name
+                input.input(type="text" name="username" id="username")
+                br
+                label(for="name") Name
+                input.input(type="text" name="name" id="name")
+                br
+                label(for="lastname") Last Name
+                input.input(type="text" name="lastname" id="lastname")
+                br
+                label(for="password") Password
+                input.input(type="password" name="password" id="password")
+                br
+                label(for="password_repeat") Repetir contraseña
+                input.input(type="password" name="password_repeat" id="password_repeat")
+                br
+                input.button(type="submit" value="Registrar")

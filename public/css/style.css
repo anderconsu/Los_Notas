@@ -1,0 +1,220 @@
+body {
+  margin: 0;
+}
+
+.navbar {
+  background-color: #333;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.logo-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.navbar-title {
+  color: #fff;
+  font-weight: bold;
+  font-size: 30px;
+  margin-right: -70px;
+}
+
+.submenu {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-list li {
+  margin-right: 10px;
+}
+
+.menu-list li:last-child {
+  margin-right: 0;
+}
+
+.menu-list li a {
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-list li a:hover {
+  background-color: #555;
+}
+
+.body-class {
+  background-color: #ffffff;
+}
+
+.note-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.note-card {
+  border: 3px solid #ccc;
+  text-align: center;
+  width: 20%;
+  margin: 10px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.note-card h2 {
+  color: #ff0000;
+}
+
+.note-card p {
+  color: #000000;
+  font-size: 14px;
+}
+
+.navbar-username {
+  color: #fff;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.formulario label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.formulario input {
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.formulario input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.formulario input[type="submit"]:hover {
+  background-color: #555;
+}
+
+.submenu-bar {
+  background-color: #f0f0f0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submenu-bar .submenu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.submenu-bar .submenu-list li {
+  margin-right: 10px;
+}
+
+.submenu-bar .submenu-list li:last-child {
+  margin-right: 0;
+}
+
+.submenu-bar .submenu-list li a {
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.submenu-bar .submenu-list li a:hover {
+  background-color: #555;
+}
+
+.agregar {
+  font-size: 50px;
+  text-decoration: none;
+}
+
+/* Formato para dispositivos móviles */
+@media (max-width: 767px) {
+  .navbar-title {
+    font-size: 24px;
+    margin-right: -50px;
+  }
+  
+  .note-card {
+    width: 100%;
+  }
+  
+  .note-card h2 {
+    font-size: 18px;
+  }
+  
+  .note-card p {
+    font-size: 12px;
+  }
+}
+
+/* Formato para tabletas */
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbar-title {
+    font-size: 28px;
+    margin-right: -60px;
+  }
+  
+  .note-card {
+    width: 30%;
+  }
+}
+
+/* Formato para pantallas más grandes */
+@media (min-width: 992px) {
+  .navbar-title {
+    font-size: 30px;
+    margin-right: -70px;
+  }
+  
+  .note-card {
+    width: 20%;
+  }
+}

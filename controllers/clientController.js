@@ -128,6 +128,26 @@ class ClientController {
       });
     }
   }
+
+//nuevo codigo
+  async logout(req, res) {
+    try {
+      if (req.session.client) {
+        // Eliminar la sesión del cliente
+        req.session.destroy();
+
+        res.redirect("/");
+      } else {
+        // El cliente no está logueado
+        res.redirect("/");
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Error logging out" });
+    }
+  }
+
+
+
 /*   updateClient() {
     async (req, res) => {
       try {

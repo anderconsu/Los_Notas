@@ -1,11 +1,28 @@
-extend ../layout
-block content
-    form(action="/client/login", method="post") 
+doctype html
+html
+  head
+    title Notes
+    link(rel="stylesheet" type="text/css" href="/css/style.css")
+  body
+    nav.navbar
+      a.logo(href="/")
+        img.logo-image(src="https://thumbs.dreamstime.com/b/ejemplo-del-vector-icono-de-la-melod%C3%ADa-nota-musical-para-su-dise%C3%B1o-sitio-web-logotipo-app-ui-131553521.jpg", alt="Logo")
+      h1.navbar-title LOS NOTAS
+      if session.client
+        span.navbar-username= session.client.username
+        a(href="/client/logout") Log Out
+      else
+        ul.menu-list
+          li
+            a(href="/") Home
+          li
+            a(href="/client/signup") Registro
+    .body-class
+      form.formulario(action="/client/login" method="post") 
         label(for="username") User Name
-        input(type="text", name="username", id="username")
+        input.input(type="text" name="username" id="username")
         br
         label(for="password") Password
-        input(type="password", name="password", id="password")
-        br
-        input(type="submit", value="Login")
-    
+        input.input(type="password" name="password" id="password")
+        br      
+        input.button(type="submit" value="Login")

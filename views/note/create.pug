@@ -1,16 +1,39 @@
-extends ../layout
-block content
-  form(action="/note/create", method="post")
-    label(for="title") Titulo
-    input(type="text", name="title" id="title")
-    br
-    label(for="content") Contenido
-    input(type="text", name="content" id="content")
-    br
-    label(for="category_id") Categoria
-    input(type="text", name="category_id" id="category_id")
-    br
-    label(for="flag") Etiquetas
-    input(type="text", name="flag" id="flag")
-    br
-    input(type="submit", value="Create")
+doctype html
+html
+    head
+        title Notes
+        link(rel="stylesheet" type="text/css" href="/css/style.css")
+    body
+        nav.navbar
+            a.logo(href="/")
+                img.logo-image(src="/assets/notas.jpeg" alt="Logo")
+            h1.navbar-title LOS NOTAS
+            if session.client
+                ul.menu-list
+                    li 
+                        span.navbar-username= session.client.username
+                    li
+                        a(href="/client/logout") Log Out
+            else
+                ul.menu-list
+                    li
+                        a(href="/") Home
+                    li
+                        a(href="/client/login") Login
+                    li
+                        a(href="/client/signup") Registro
+
+form.formulario(action="/note/create" method="post")
+  label(for="title") Titulo
+  input.input(type="text" name="title" id="title")
+  br
+  label(for="content") Contenido
+  input.input(type="text" name="content" id="content")
+  br
+  label(for="category_id") Categoria
+  input.input(type="text" name="category_id" id="category_id")
+  br
+  label(for="flag") Etiquetas
+  input.input(type="text" name="flag" id="flag")
+  br
+  input.button(type="submit" value="Create")

@@ -23,14 +23,14 @@ class NoteController {
                 include: [
                     {
                         model: Client,
-                        attributes: ["id", "username"],
+                        attributes: ["id", "username", "name", "lastname" ],
                     },
                     {
                         model: Category,
                         attributes: ["name"],
                     },
                 ],
-                attributes: ["id", "title", "content"],
+                attributes: ["id", "title", "content", "flag"],
             });
             //mix all notes randomly
             notes = shuffleArray(notes);
@@ -76,7 +76,12 @@ class NoteController {
     }
     async renderAllNotes(req, res) {
         let notes = await this.getallNotes(req, res);
-        res.render("test/testdata", { notes });
+     
+        res.render("index", { notes }); // Asegúrate de pasar las notas como un objeto en el segundo argumento
+
+        res.render("note/note", { notes });
+        
+        //res.render("test/testdata", { notes });
     }
 
     // SPECIFIC NOTE
@@ -144,18 +149,26 @@ class NoteController {
                 include: [
                     {
                         model: Note,
-                        attributes: ["id", "title", "content"],
+                        attributes: ["id", "title", "content", "flag"],
                         include: [
                             {
                                 model: Client,
-                                attributes: ["id", "username"],
+                                attributes: ["id", "username", "name", "lastname"],
                             },
                         ],
                     },
                 ],
                 attributes: ["id", "name"],
             });
-            return category;
+
+            //nuevo por que al se estaba devolviendo solo la categoria como tal y no las notas asociadas a esa categoria para poder renderizar
+                      
+              const notes = category.Notes;
+
+              return { category, notes };
+            
+
+          //aqui el problema   return category;
         } catch (error) {
             res.status(500).json({ error: "Error getting specific note" });
         }
@@ -185,8 +198,14 @@ class NoteController {
         }
     }
     async renderByCategory(req, res) {
-        let notes = await this.getByCategory(req, res);
-        res.render("test/testdata", { notes });
+       
+       
+        let notesAndCategoryObject = await this.getByCategory(req, res);
+        
+        
+     res.render("note/notecategory", { notesAndCategoryObject });
+ //res.status(201).json(notes);
+ //res.status(201).json(notesAndCategoryObject.category.notes[0].flag);
     }
     async deleteNote(req, res) {
         try {
@@ -200,7 +219,10 @@ class NoteController {
                 // Check if the user is the creator of the note or an admin
                 if (note.client_id === clientId || isAdmin) {
                     await note.destroy();
-                    res.json({ message: "Note deleted successfully" });
+                    
+                    res.redirect("/");
+                    
+                    //res.json({ message: "Note deleted successfully" });
                 } else {
                     res.status(403).json({ error: "You are not authorized to delete this note" });
                 }
@@ -227,7 +249,10 @@ class NoteController {
                     category_id,
                 });
 
-                res.status(201).json(note);
+                res.status(201).redirect("/");
+
+                //res.status(201).json(note);
+            
             } catch (error) {
                 res.status(500).json({ error: "Error creating note" });
             }

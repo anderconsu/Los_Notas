@@ -22,6 +22,14 @@
     "sequelize": "^6.32.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
-  }
+    "nodemon": "^3.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anderconsu/Los_Notas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anderconsu/Los_Notas/issues"
+  },
+  "homepage": "https://github.com/anderconsu/Los_Notas#readme"
 }

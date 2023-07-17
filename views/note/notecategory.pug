@@ -1,0 +1,72 @@
+doctype html
+html
+    head
+        title Notes
+        link(rel="stylesheet" type="text/css" href="/css/style.css")
+    body
+        nav.navbar
+            a.logo(href="/")
+                img.logo-image(src="/assets/notas.jpeg" alt="Logo")
+            h1.navbar-title LOS NOTAS
+            if session.client
+                ul.menu-list
+                    li 
+                        span.navbar-username= session.client.username
+                    li
+                        a(href="/client/logout") Log Out
+            else
+                ul.menu-list
+                    li
+                        a(href="/") Home
+                    li
+                        a(href="/client/login") Login
+                    li
+                        a(href="/client/signup") Registro
+    nav.submenu-bar
+        ul.submenu-list
+            li
+                a(href="http://localhost:8080/note/category/1") Sports
+            li
+                a(href="http://localhost:8080/note/category/2") Technology
+            li
+                a(href="http://localhost:8080/note/category/3") Fashion
+            li
+                a(href="http://localhost:8080/note/category/4") Food
+            li
+                a(href="http://localhost:8080/note/category/5") Travel
+            li
+                a(href="http://localhost:8080/note/category/6") Music
+            li
+                a(href="http://localhost:8080/note/category/7") Movies
+            li
+                a(href="http://localhost:8080/note/category/8") Health
+            li
+                a(href="http://localhost:8080/note/category/9") Books
+            li
+                a(href="http://localhost:8080/note/category/10") Art
+.body-class
+h1 Categoría: #{notesAndCategoryObject.category.name}
+.note-cards
+        .note-card
+            br
+            br
+            br
+            a(href="http://localhost:8080/note/create") +
+        if notesAndCategoryObject.category.notes.length > 0
+            each note in notesAndCategoryObject.category.notes
+                .note-card
+                    h2= note.title
+                    p= note.content
+                    p= note.client.name + ' ' + note.client.lastname
+                    p= "@" + note.flag
+                        if session.client.id === note.client.id || isAdmin
+                            form(action=`note/delete/${note.id}`, method="DELETE")
+                                button(type="submit") Borrar
+        else
+            p No hay notas disponibles.
+
+
+
+
+
+

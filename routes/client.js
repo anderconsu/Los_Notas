@@ -12,6 +12,12 @@ router.get("/signup", (req, res) => {newClientController.createClientView(req, r
 router.get("/login", (req, res) => {newClientController.createLoginView(req, res)});
 router.post("/login", (req, res) => {newClientController.verifyLogin(req, res)});
 
+
+// Ruta de logout
+router.get("/logout", (req, res) => { newClientController.logout(req, res) });
+
+
+
 export default router;
 
 // const usuarioController = {
