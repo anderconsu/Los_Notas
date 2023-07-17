@@ -40,22 +40,27 @@ class ClientController {
             res.status(201).redirect("/client/login");
         } catch (error) {
             let errorMessage = "";
+            let status = 0;
             console.error("Error creating client:", error);
             // Handle specific errors and send appropriate responses
             if (error.message === "Passwords do not match") {
                 errorMessage = "Las contraseñas no coinciden."
+                status = 403
             } else if (error.message === "The username is already taken") {
                 errorMessage = "El usuario ya existe."
+                status = 403
             } else if (error.message === "Regex error") {
-                errorMessage = "La contraseña debe tener al menos 8 carácteres, una mayúscula, una minúscula y un número." 
+                errorMessage = "La contraseña debe tener al menos 8 carácteres, una mayúscula, una minúscula y un número."
+                status = 403
             } else if (error.message === "All fields are required") {
                 errorMessage = "Todos los campos son obligatorios."
+                status = 403
             }
             else {
                 res.status(500).json({ error: "Internal Server Error" });
             }
             console.log("he llegado hasta aqui");
-            res.render(`client/signup`, {errorMessage });
+            res.status(status).render(`client/signup`, {errorMessage });
         }
     }
     async createClientApi(req, res) {
@@ -101,13 +106,17 @@ class ClientController {
             }
         } catch (error) {
             console.log(error);
+            let status = 0;
+            let errorMessage = "";
             if (error.message === "User or password not corrrect") {
-                res.status(401).redirect("/client/login");
+                errorMessage = "Usuario o contraseña incorrecto.";
+                status = 403;
             } else {
                 res.status(500).json({
                     error: "Error desconocido al iniciar sesión",
                 });
             }
+            res.status(status).render("client/login", { errorMessage });
         }
     }
     async verifyLoginApi(req, res) {
