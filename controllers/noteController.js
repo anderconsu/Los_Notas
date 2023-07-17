@@ -160,16 +160,11 @@ class NoteController {
                 ],
                 attributes: ["id", "name"],
             });
-
-            //nuevo por que al se estaba devolviendo solo la categoria como tal y no las notas asociadas a esa categoria para poder renderizar
-                      
-              const notes = category.Notes;
-
-              return { category, notes };
-            
-
-          //aqui el problema   return category;
-        } catch (error) {
+            if (!category) {
+                throw new Error("Category not found");
+            }
+            return category;
+        } catch (error) { 
             res.status(500).json({ error: "Error getting specific note" });
         }
     }

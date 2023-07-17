@@ -25,35 +25,35 @@ html
     nav.submenu-bar
         ul.submenu-list
             li
-                a(href="http://localhost:8080/note/category/1") Sports
+                a(href="/note/category/1") Sports
             li
-                a(href="http://localhost:8080/note/category/2") Technology
+                a(href="/note/category/2") Technology
             li
-                a(href="http://localhost:8080/note/category/3") Fashion
+                a(href="/note/category/3") Fashion
             li
-                a(href="http://localhost:8080/note/category/4") Food
+                a(href="/note/category/4") Food
             li
-                a(href="http://localhost:8080/note/category/5") Travel
+                a(href="/note/category/5") Travel
             li
-                a(href="http://localhost:8080/note/category/6") Music
+                a(href="/note/category/6") Music
             li
-                a(href="http://localhost:8080/note/category/7") Movies
+                a(href="/note/category/7") Movies
             li
-                a(href="http://localhost:8080/note/category/8") Health
+                a(href="/note/category/8") Health
             li
-                a(href="http://localhost:8080/note/category/9") Books
+                a(href="/note/category/9") Books
             li
-                a(href="http://localhost:8080/note/category/10") Art
+                a(href="/note/category/10") Art
 .body-class
-h1 Categoría: #{notesAndCategoryObject.category.name}
+h1 Categoría: #{notesAndCategoryObject.name}
 .note-cards
         .note-card
             br
             br
             br
-            a(href="http://localhost:8080/note/create") +
-        if notesAndCategoryObject.category.notes.length > 0
-            each note in notesAndCategoryObject.category.notes
+            a(href="/note/create") +
+        if notesAndCategoryObject.notes.length > 0
+            each note in notesAndCategoryObject.notes
                 .note-card
                     h2= note.title
                     p= note.content

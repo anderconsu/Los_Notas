@@ -128,8 +128,6 @@ class ClientController {
       });
     }
   }
-
-//nuevo codigo
   async logout(req, res) {
     try {
       if (req.session.client) {
