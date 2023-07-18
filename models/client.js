@@ -1,6 +1,6 @@
 import connection from "../config/sequalize.js";
 import Sequelize from "sequelize";
-
+//Define the table Client made in mysql for secualice.
 const Client = connection.define(
   "client",
   {

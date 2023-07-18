@@ -2,7 +2,7 @@ import connection from "../config/sequalize.js";
 import Sequelize from "sequelize";
 import Client from "./client.js";
 import Category from "./category.js";
-
+//Define the table Note made in mysql for secualice.
 const Note = connection.define(
   "note",
   {
@@ -34,7 +34,7 @@ const Note = connection.define(
     },
   }
 );
-
+//Define the relations between tables.
 Note.belongsTo(Client, { foreignKey: "client_id" });
 Note.belongsTo(Category, { foreignKey: "category_id" });
 Category.hasMany(Note, { foreignKey: "category_id" });

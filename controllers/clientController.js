@@ -3,9 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 class ClientController {
-    async createClientView(req, res) {
-        res.render("client/signup");
-    }
+    //SIGN-UP
+      //Create a new user in the db and redirect to the login.
     async createClient(req, res) {
         try {
             let { username, name, lastname, password, password_repeat } =
@@ -67,6 +66,7 @@ class ClientController {
             res.status(status).render(`client/signup`, {errorMessage });
         }
     }
+      //Create a new user in the db and returns a .json.
     async createClientApi(req, res) {
         try {
             let { username, password, password_repeat } = req.body;
@@ -85,9 +85,16 @@ class ClientController {
             });
         }
     }
+      //Create a new user in the db and redirect to the login.
+    async createClientView(req, res) {
+      res.render("client/signup");
+    }
+    //LOG-IN
+      //Respose to a .pug file to reder the log-in.
     async createLoginView(req, res) {
         res.render("client/login");
     }
+      //Checks if the user exist. Save the sesion and redirect to "/".
     async verifyLogin(req, res) {
         try {
             let { username, password } = req.body;
@@ -100,9 +107,7 @@ class ClientController {
                 throw new Error("User or password not corrrect");
             } else {
                 if (await bcrypt.compare(password, client.password)) {
-                    // Guardar la sesión
                     req.session.client = client;
-                    // Redirigir al usuario
                     res.redirect("/");
                 } else {
                     throw new Error("User or password not corrrect");
@@ -123,6 +128,7 @@ class ClientController {
             res.status(status).render("client/login", { errorMessage });
         }
     }
+      //Checks if the user exist. Gerenate a bearer token and returns the token as a .json.
     async verifyLoginApi(req, res) {
         console.log(req.body);
         try {
@@ -141,8 +147,6 @@ class ClientController {
                     error: "User or password not corrrect",
                 });
             }
-
-            // Generar token JWT
             let payload = { username };
             let token = jwt.sign(payload, process.env.JWT_SECRET, {
                 expiresIn: "1h",
@@ -158,71 +162,21 @@ class ClientController {
             });
         }
     }
-
-
+      //Delete de session and redirect to "/".
     async logout(req, res) {
         try {
           if (req.session.client) {
-            // Eliminar la sesión del cliente
             req.session.destroy();
     
             res.redirect("/");
           } else {
-            // El cliente no está logueado
             res.redirect("/");
           }
         } catch (error) {
           res.status(500).json({ error: "Error logging out" });
         }
-      }
-
-
-    /*   updateClient() {
-    async (req, res) => {
-      try {
-        const { id } = req.params;
-        const { username, name, lastname, password } = req.body;
-
-        const user = await Client.findByPk(id);
-
-        if (user) {
-          user.username = username;
-          user.name = name;
-          user.lastname = lastname;
-          user.password = password;
-
-          await user.save();
-
-          res.json(user);
-        } else {
-          res.status(404).json({ error: "User not found" });
-        }
-      } catch (error) {
-        res.status(500).json({ error: "Error updating user" });
-      }
-    };
-  }
-  deleteClient() {
-    async (req, res) => {
-      try {
-        const { id } = req.params;
-
-        const client = await Client.findByPk(id);
-
-        if (client) {
-          await client.destroy();
-
-          res.sendStatus(204);
-        } else {
-          res.status(404).json({ error: "User not found" });
-        }
-      } catch (error) {
-        res.status(500).json({ error: "Error deleting user" });
-      }
-    };
-  } */
+    }
 }
-
+// Start one instance of the class to export to other files.
 let newClientController = new ClientController();
-
 export default newClientController;
