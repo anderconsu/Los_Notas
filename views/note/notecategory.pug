@@ -58,7 +58,7 @@ h1 Categoría: #{notesAndCategoryObject.name}
             .note-card(class=`category-${note.category_id}`)
 
                 h2 #{note.title}
-                p Contenido: #{note.content}
+                p #{note.content}
                 if note.flag
                     h5 Flag: #{note.flag}
                 h4= note.client.name + ' ' + note.client.lastname
