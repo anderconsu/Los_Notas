@@ -14,37 +14,37 @@ html
                     li 
                         span.navbar-username= session.client.username
                     li
-                        a(href="/client/logout") Log Out
-            else
+                        a(href="/client/logout") Cerrar Sesión
+            else    
                 ul.menu-list
                     li
                         a(href="/") Home
                     li
-                        a(href="/client/login") Login
+                        a(href="/client/login") Iniciar Sesión
                     li
                         a(href="/client/signup") Registro
     nav.submenu-bar
         ul.submenu-list
             li
-                a(href="/note/category/1") Sports
+                a(href="/note/category/1") Deportes
             li
-                a(href="/note/category/2") Technology
+                a(href="/note/category/2") Tecnología
             li
-                a(href="/note/category/3") Fashion
+                a(href="/note/category/3") Moda
             li
-                a(href="/note/category/4") Food
+                a(href="/note/category/4") Comida
             li
-                a(href="/note/category/5") Travel
+                a(href="/note/category/5") Viajes
             li
-                a(href="/note/category/6") Music
+                a(href="/note/category/6") Musica
             li
-                a(href="/note/category/7") Movies
+                a(href="/note/category/7") Peliculas
             li
-                a(href="/note/category/8") Health
+                a(href="/note/category/8") Salud
             li
-                a(href="/note/category/9") Books
+                a(href="/note/category/9") Libros
             li
-                a(href="/note/category/10") Art
+                a(href="/note/category/10") Arte
 .body-class
 h1 Categoría: #{notesAndCategoryObject.name}
 .note-cards

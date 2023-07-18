@@ -11,7 +11,7 @@ html
         a(href="/") LOS NOTAS
       if session.client
         span.navbar-username= session.client.username
-        a(href="/client/logout") Log Out
+        a(href="/client/logout") Cerrar Sesión
       else
         ul.menu-list
           li
@@ -20,10 +20,10 @@ html
             a(href="/client/signup") Registro
     .body-class
       form.formulario(action="/client/login" method="post") 
-        label(for="username") User Name
+        label(for="username") Usuario
         input.input(type="text" name="username" id="username")
         br
-        label(for="password") Password
+        label(for="password") Contraseña
         input.input(type="password" name="password" id="password")
         br      
         input.button(type="submit" value="Login")

@@ -11,25 +11,25 @@ html
                 a(href="/") LOS NOTAS
             if session.client
                 span.navbar-username= session.client.username
-                a(href="/client/logout") Log Out
+                a(href="/client/logout") Cerrar Sesión
             else
                 ul.menu-list
                     li
                         a(href="/") Home
                     li
-                        a(href="/client/login") Login
+                        a(href="/client/login") Iniciar Sesión
         .body-class
             form.formulario(action="/client/signup" method="post")
-                label(for="username") User Name
+                label(for="username") Usuario
                 input.input(type="text" name="username" id="username")
                 br
-                label(for="name") Name
+                label(for="name") Nombre
                 input.input(type="text" name="name" id="name")
                 br
-                label(for="lastname") Last Name
+                label(for="lastname") Apellido
                 input.input(type="text" name="lastname" id="lastname")
                 br
-                label(for="password") Password
+                label(for="password") Contraseña
                 input.input(type="password" name="password" id="password")
                 br
                 label(for="password_repeat") Repetir contraseña
