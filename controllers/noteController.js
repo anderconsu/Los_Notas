@@ -6,7 +6,7 @@ import { render } from "pug";
 
 class NoteController {
     // NOTES INFO
-        //Returns note[ARRAY] with all notes ramdomly mixed.
+    //Returns note[ARRAY] with all notes ramdomly mixed.
     async getallNotes(req, res) {
         // mix function ===
         function shuffleArray(array) {
@@ -31,13 +31,13 @@ class NoteController {
                 attributes: ["id", "title", "content", "flag"],
             });
             //mix all notes randomly
-            notes = shuffleArray(notes);
+            notes = notes.reverse();
             return notes;
         } catch (error) {
             res.status(500).json({ error: "Error getting all notes" });
         }
     }
-        //Returns note[ARRAY] .json with all notes ramdomly mixed.
+    //Returns note[ARRAY] .json with all notes ramdomly mixed.
     async getallNotesApi(req, res) {
         try {
             let notes = await Note.findAll({
@@ -58,15 +58,15 @@ class NoteController {
             res.status(500).json({ error: "Error getting all notes" });
         }
     }
-        //Respose to a .pug file to reder notes.
+    //Respose to a .pug file to reder notes.
     async renderAllNotes(req, res) {
         let notes = await this.getallNotes(req, res);
-     
+
         res.render("index", { notes });
     }
 
     // SPECIFIC NOTE INFO
-        //Returns a note from "id" in the req.params.
+    //Returns a note from "id" in the req.params.
     async getSpecificNote(req, res) {
         try {
             const { id } = req.params;
@@ -88,7 +88,7 @@ class NoteController {
             res.status(500).json({ error: "Error getting specific note" });
         }
     }
-        //Returns .json of a note from "id" in the req.params.
+    //Returns .json of a note from "id" in the req.params.
     async getSpecificNoteApi(req, res) {
         try {
             const { id } = req.params;
@@ -111,7 +111,7 @@ class NoteController {
         }
     }
     // CATEGORY INFO
-        //Returns categories .json with all categories.
+    //Returns categories .json with all categories.
     async getAllCategoriesApi(req, res) {
         console.log("llegue");
         try {
@@ -124,7 +124,7 @@ class NoteController {
             res.status(500).json({ error: "Error getting all categories" });
         }
     }
-        //Returns a categori from "id" in the req.params.
+    //Returns a categori from "id" in the req.params.
     async getByCategory(req, res) {
         try {
             const { id } = req.params;
@@ -166,7 +166,7 @@ class NoteController {
             res.status(500).json({ error: "Error getting notes by category" });
         }
     }
-        //Returns a categori .json from "id" in the req.params.
+    //Returns a categori .json from "id" in the req.params.
     async getByCategoryApi(req, res) {
         try {
             const { id } = req.params;
@@ -197,13 +197,13 @@ class NoteController {
             res.status(500).json({ error: "Error getting notes by category" });
         }
     }
-        //Respose to a .pug file to reder categories.
-    async renderByCategory(req, res) {      
-        let notesAndCategoryObject = await this.getByCategory(req, res);                
-     res.render("note/notecategory", { notesAndCategoryObject });
+    //Respose to a .pug file to reder categories.
+    async renderByCategory(req, res) {
+        let notesAndCategoryObject = await this.getByCategory(req, res);
+        res.render("note/notecategory", { notesAndCategoryObject });
     }
-   // NOTE ACTION
-        //Delete any note by "id" in the req.params.
+    // NOTE ACTION
+    //Delete any note by "id" in the req.params.
     async deleteNote(req, res) {
         try {
             const { id } = req.params;
@@ -228,11 +228,11 @@ class NoteController {
             res.status(500).json({ error: "Error deleting note" });
         }
     }
-        //Respose to a .pug file to reder note creation form.
+    //Respose to a .pug file to reder note creation form.
     async renderCreateNote(req, res) {
         res.render("note/create");
     }
-        //Create a note from the info in the form.
+    //Create a note from the info in the form.
     async createNote(req, res) {
         try {
             let { title, content, category_id, flag } = req.body;
@@ -252,10 +252,11 @@ class NoteController {
         } catch (error) {
             let errorMessage = "";
             if (error.message === "Title and content are required") {
-                errorMessage = "Es necesario añadir titulo y contenido a la nota.";
+                errorMessage =
+                    "Es necesario añadir titulo y contenido a la nota.";
                 res.render("note/create", { errorMessage });
-            }else{
-            res.status(500).json({ error: "Error creating note" });
+            } else {
+                res.status(500).json({ error: "Error creating note" });
             }
         }
     }
