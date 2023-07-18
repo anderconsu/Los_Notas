@@ -55,6 +55,9 @@ class ClientController {
             } else if (error.message === "All fields are required") {
                 errorMessage = "Todos los campos son obligatorios."
                 status = 403
+            } else if (error.message === "Username must be at least 3 characters") {
+                errorMessage = "El nombre de usuario debe tener al menos 3 caracteres."
+                status = 403
             }
             else {
                 res.status(500).json({ error: "Internal Server Error" });
