@@ -57,11 +57,11 @@ h1 Categoría: #{notesAndCategoryObject.name}
         each note in notesAndCategoryObject.notes
             .note-card(class=`category-${note.category_id}`)
 
-                h2 Etiqueta: #{note.title}
+                h2 #{note.title}
                 p Contenido: #{note.content}
                 if note.flag
-                    p Flag: #{note.flag}
-                p= note.client.name + ' ' + note.client.lastname
+                    h5 Flag: #{note.flag}
+                h4= note.client.name + ' ' + note.client.lastname
                     if session.client.id === note.client.id || session.client.rol === 'admin'
                         form(action=`note/delete/${note.id}`, method="DELETE")
                             button(type="submit") Borrar

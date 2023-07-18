@@ -94,7 +94,9 @@ a {
 }
 
 .note-card h2 {
-  color: #ffffff;
+  color: #000000;
+  background-color: white;
+  border: 3px solid black;
 }
 
 .note-card p {
@@ -104,89 +106,48 @@ a {
 
 
 
-/* Estilos para las categorías */
-.category-sports {
-  background-color: rgba(255, 0, 0, 0.2); /* Rojo con transparencia para Sports */
-}
-
-.category-technology {
-  background-color: rgba(0, 255, 0, 0.2); /* Verde con transparencia para Technology */
-}
-
-.category-fashion {
-  background-color: rgba(0, 0, 255, 0.2); /* Azul con transparencia para Fashion */
-}
-
-.category-food {
-  background-color: rgba(255, 165, 0, 0.2); /* Naranja con transparencia para Food */
-}
-
-.category-travel {
-  background-color: rgba(128, 0, 128, 0.2); /* Púrpura con transparencia para Travel */
-}
-
-.category-music {
-  background-color: rgba(255, 215, 0, 0.2); /* Amarillo con transparencia para Music */
-}
-
-.category-movies {
-  background-color: rgba(139, 0, 139, 0.2); /* Violeta con transparencia para Movies */
-}
-
-.category-health {
-  background-color: rgba(0, 128, 0, 0.2); /* Verde oscuro con transparencia para Health */
-}
-
-.category-books {
-  background-color: rgba(255, 69, 0, 0.2); /* Naranja rojizo con transparencia para Books */
-}
-
-.category-art {
-  background-color: rgba(255, 20, 147, 0.2); /* Rosa intenso con transparencia para Art */
-}
-
 
 
 
 /* Estilos para las categorías por id */
 .category-1 {
-  background-color: rgba(255, 0, 0, 0.2); /* Rojo con transparencia para Sports */
+  background-color: rgba(255, 0, 0, 0.3); /* Rojo con transparencia para Sports */
 }
 
 .category-2 {
-  background-color: rgba(0, 255, 0, 0.2); /* Verde con transparencia para Technology */
+  background-color: rgba(0, 255, 0, 0.3); /* Verde con transparencia para Technology */
 }
 
 .category-3 {
-  background-color: rgba(0, 0, 255, 0.2); /* Azul con transparencia para Fashion */
+  background-color: rgba(0, 0, 255, 0.3); /* Azul con transparencia para Fashion */
 }
 
 .category-4 {
-  background-color: rgba(255, 165, 0, 0.2); /* Naranja con transparencia para Food */
+  background-color: rgba(255, 165, 0, 0.3); /* Naranja con transparencia para Food */
 }
 
 .category-5 {
-  background-color: rgba(128, 0, 128, 0.2); /* Púrpura con transparencia para Travel */
+  background-color: rgba(128, 0, 128, 0.3); /* Púrpura con transparencia para Travel */
 }
 
 .category-6 {
-  background-color: rgba(255, 215, 0, 0.2); /* Amarillo con transparencia para Music */
+  background-color: rgba(255, 215, 0, 0.3); /* Amarillo con transparencia para Music */
 }
 
 .category-7 {
-  background-color: rgba(139, 0, 139, 0.2); /* Violeta con transparencia para Movies */
+  background-color: rgba(139, 0, 139, 0.3); /* Violeta con transparencia para Movies */
 }
 
 .category-8 {
-  background-color: rgba(0, 128, 0, 0.2); /* Verde oscuro con transparencia para Health */
+  background-color: rgba(0, 128, 0, 0.3); /* Verde oscuro con transparencia para Health */
 }
 
 .category-9 {
-  background-color: rgba(255, 69, 0, 0.2); /* Naranja rojizo con transparencia para Books */
+  background-color: rgba(255, 69, 0, 0.3); /* Naranja rojizo con transparencia para Books */
 }
 
 .category-10 {
-  background-color: rgba(255, 20, 147, 0.2); /* Rosa intenso con transparencia para Art */
+  background-color: rgba(255, 20, 147, 0.3); /* Rosa intenso con transparencia para Art */
 }
 
 

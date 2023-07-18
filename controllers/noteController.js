@@ -27,7 +27,7 @@ class NoteController {
                     },
                     {
                         model: Category,
-                        attributes: ["name"],
+                        attributes: ["name", "id"],
                     },
                 ],
                 attributes: ["id", "title", "content", "flag"],
@@ -51,7 +51,7 @@ class NoteController {
                     },
                     {
                         model: Category,
-                        attributes: ["name"],
+                        attributes: ["name", "id"],
                     },
                 ],
                 attributes: ["id", "title", "content"],
@@ -66,7 +66,8 @@ class NoteController {
      
         res.render("index", { notes }); // Asegúrate de pasar las notas como un objeto en el segundo argumento
 
-        
+         //res.status(201).json(notes);
+
     }
 
     // SPECIFIC NOTE

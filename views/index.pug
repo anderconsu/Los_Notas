@@ -53,18 +53,18 @@ html
                     br
                     a.agregar(href="/note/create") +
 
-                if notes.length > 0
+                if notes && notes.length > 0
                     each note in notes
-                        .note-card(class=`category-${note.category.name.toLowerCase()}`)
-                            h2 Etiqueta: #{note.title}
+                        .note-card(class=`category-${note.category.id}`)
+                            h2 #{note.title}
                             .content
                                 p Contenido: #{note.content}
                                 if note.flag
-                                    p Flag: #{note.flag}
-                                p Categoría: #{note.category.name}
+                                    h5 Flag: #{note.flag}
+                                h5 Categoría: #{note.category.name}
                             if session.client
                                 .author
-                                    p= 'Autor: ' + note.client.name + ' ' + note.client.lastname 
+                                    h4= 'Autor: ' + note.client.name + ' ' + note.client.lastname 
                                     if session.client.id === note.client.id || session.client.rol === 'admin'
                                         form(action=`note/delete/${note.id}`, method="DELETE")
                                             button(type="submit") Borrar
