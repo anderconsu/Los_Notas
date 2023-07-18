@@ -29,6 +29,17 @@ services:
       - mysql
     networks:
       - app-network
+  swagger:
+    image: swaggerapi/swagger-ui
+    container_name: ${SWAGGER_HOST}
+    ports:
+      - ${SWAGGER_PORT}:8080
+    environment:
+      SWAGGER_JSON: /app/swagger.json
+    volumes:
+      - ./swagger.json:/app/swagger.json
+    networks:
+      - app-network
   
 networks:
   app-network:

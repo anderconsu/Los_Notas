@@ -1,13 +1,19 @@
 import express from "express";
 import router from "./routes/main.js";
-import dotenv from "dotenv";
 import session from "express-session";
-dotenv.config();
+import dotenv from "dotenv";
+import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from "./swagger.js"
+dotenv .config();
 
 const app = express();
+app.use(cors());
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+console.log("document",swaggerDocument);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument.default));
 
 app.use(session(
     {
