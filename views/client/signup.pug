@@ -6,7 +6,7 @@ html
     body
         nav.navbar
             a.logo(href="/")
-                img.logo-image(src="/assets/notas.jpeg" alt="Logo")
+                img.logo-image(src="/assets/new_notas.png" alt="Logo")
             h1.navbar-title 
                 a(href="/") LOS NOTAS
             if session.client
@@ -17,7 +17,7 @@ html
                     li
                         a(href="/") Home
                     li
-                        a(href="/client/login") Iniciar Sesión
+                     a(href="/client/login") Iniciar Sesión
         .body-class
             form.formulario(action="/client/signup" method="post")
                 label(for="username") Usuario

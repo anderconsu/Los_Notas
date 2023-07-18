@@ -6,7 +6,7 @@ html
     body
         nav.navbar
             a.logo(href="/")
-                img.logo-image(src="/assets/notas.jpeg" alt="Logo")
+                img.logo-image(src="/assets/new_notas.png" alt="Logo")
             h1.navbar-title 
                 a(href="/") LOS NOTAS
             if session.client
@@ -26,10 +26,10 @@ html
 
 form.formulario(action="/note/create" method="post")
     label(for="title") Titulo
-    input.input(type="text" name="title" id="title")
+    input.input(type="text" name="title" id="title" maxlength="50")
     br
     label(for="content") Contenido
-    textarea.textarea(name="content" id="content" rows="6" cols="50")
+    textarea.textarea(name="content" id="content" rows="6" cols="50" maxlength="250")
     br
     label(for="category_id") Categoria
     select#category_id(name="category_id")
