@@ -248,10 +248,7 @@ class NoteController {
                 client_id,
                 category_id,
             });
-
             res.status(201).redirect("/");
-
-            //res.status(201).json(note);
         } catch (error) {
             let errorMessage = "";
             if (error.message === "Title and content are required") {
@@ -259,17 +256,8 @@ class NoteController {
                 res.render("note/create", { errorMessage });
             }else{
             res.status(500).json({ error: "Error creating note" });
-                const note = await Note.create({
-                    title,
-                    content,
-                    flag,
-                    client_id,
-                    category_id,
-                });
-                res.status(201).redirect("/");            
-            } catch (error) {
-                res.status(500).json({ error: "Error creating note" });
             }
+        }
     }
 }
 // Start of one instance of the class to export to other files.
