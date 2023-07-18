@@ -65,7 +65,7 @@ html
                             if session.client
                                 .author
                                     p= 'Autor: ' + note.client.name + ' ' + note.client.lastname 
-                                    if session.client.id === note.client.id || isAdmin
+                                    if session.client.id === note.client.id || session.client.rol === 'admin'
                                         form(action=`note/delete/${note.id}`, method="DELETE")
                                             button(type="submit") Borrar
                 else

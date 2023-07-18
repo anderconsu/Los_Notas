@@ -26,7 +26,8 @@ class ClientController {
                     "Regex error"
                 );
             }
-            const existingClient = await Client.findOne({ username });
+            const existingClient = await Client.findOne({ where: {username} });
+            console.log(existingClient);
             if (existingClient) {
                 throw new Error("The username is already taken");
             }
