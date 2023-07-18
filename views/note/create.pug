@@ -45,9 +45,11 @@ form.formulario(action="/note/create" method="post")
         option(value="10") Arte
     br
     label(for="flag") Etiquetas
-    input.input(type="text" name="flag" id="flag")
+    input.input(type="text" name="flag" id="flag" maxlength="10")
     br
     input.button(type="submit" value="Create")
+    if errorMessage
+        p= errorMessage
 
 
 

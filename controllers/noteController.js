@@ -23,7 +23,7 @@ class NoteController {
                 include: [
                     {
                         model: Client,
-                        attributes: ["id", "username", "name", "lastname" ],
+                        attributes: ["id", "username", "name", "lastname"],
                     },
                     {
                         model: Category,
@@ -63,11 +63,10 @@ class NoteController {
     }
     async renderAllNotes(req, res) {
         let notes = await this.getallNotes(req, res);
-     
+
         res.render("index", { notes }); // Asegúrate de pasar las notas como un objeto en el segundo argumento
 
-         //res.status(201).json(notes);
-
+        //res.status(201).json(notes);
     }
 
     // SPECIFIC NOTE
@@ -135,11 +134,22 @@ class NoteController {
                 include: [
                     {
                         model: Note,
-                        attributes: ["id", "title", "content", "flag", "category_id"],
+                        attributes: [
+                            "id",
+                            "title",
+                            "content",
+                            "flag",
+                            "category_id",
+                        ],
                         include: [
                             {
                                 model: Client,
-                                attributes: ["id", "username", "name", "lastname"],
+                                attributes: [
+                                    "id",
+                                    "username",
+                                    "name",
+                                    "lastname",
+                                ],
                             },
                         ],
                     },
@@ -188,32 +198,31 @@ class NoteController {
         }
     }
     async renderByCategory(req, res) {
-       
-       
         let notesAndCategoryObject = await this.getByCategory(req, res);
-        
-        
-     res.render("note/notecategory", { notesAndCategoryObject });
- //res.status(201).json(notesAndCategoryObject);
+
+        res.render("note/notecategory", { notesAndCategoryObject });
+        //res.status(201).json(notesAndCategoryObject);
     }
     async deleteNote(req, res) {
         try {
             const { id } = req.params;
             const note = await Note.findByPk(id);
-    
+
             if (note) {
                 const clientId = req.session.client.id;
                 const isAdmin = req.session.client.rol === "admin";
-    
+
                 // Check if the user is the creator of the note or an admin
                 if (note.client_id === clientId || isAdmin) {
                     await note.destroy();
-                    
+
                     res.redirect("/");
-                    
+
                     //res.json({ message: "Note deleted successfully" });
                 } else {
-                    res.status(403).json({ error: "You are not authorized to delete this note" });
+                    res.status(403).json({
+                        error: "You are not authorized to delete this note",
+                    });
                 }
             } else {
                 res.status(404).json({ error: "Note not found" });
@@ -226,25 +235,33 @@ class NoteController {
         res.render("note/create");
     }
     async createNote(req, res) {
-            try {
-                let { title, content, category_id, flag } = req.body;
-                let client_id = req.session.client.id;
-
-                const note = await Note.create({
-                    title,
-                    content,
-                    flag,
-                    client_id,
-                    category_id,
-                });
-
-                res.status(201).redirect("/");
-
-                //res.status(201).json(note);
-            
-            } catch (error) {
-                res.status(500).json({ error: "Error creating note" });
+        try {
+            let { title, content, category_id, flag } = req.body;
+            let client_id = req.session.client.id;
+            if (!title || !content) {
+                throw new Error("Title and content are required");
             }
+
+            const note = await Note.create({
+                title,
+                content,
+                flag,
+                client_id,
+                category_id,
+            });
+
+            res.status(201).redirect("/");
+
+            //res.status(201).json(note);
+        } catch (error) {
+            let errorMessage = "";
+            if (error.message === "Title and content are required") {
+                errorMessage = "Es necesario añadir titulo y contenido a la nota.";
+                res.render("note/create", { errorMessage });
+            }else{
+            res.status(500).json({ error: "Error creating note" });
+            }
+        }
     }
 }
 
