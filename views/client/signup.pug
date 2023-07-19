@@ -1,20 +1,40 @@
-extend ../layout
-block content
-    form(action="/client/signup", method="post") 
-        label(for="username") User Name
-        input(type="text", name="username", id="username")
-        br
-        label(for="name") Name
-        input(type="text", name="name", id="name")
-        br
-        label(for="lastname") Last Name
-        input(type="text", name="lastname", id="lastname")
-        br
-        label(for="password") Password
-        input(type="password", name="password", id="password")
-        br
-        label(for="password_repeat") Repetir contraseña
-        input(type="password", name="password_repeat", id="password_repeat")
-        br
-        input(type="submit", value="Registrar")
-    
+doctype html
+html
+    head
+        title Los Notas
+        link(rel="stylesheet" type="text/css" href="/css/style.css")
+    body
+        nav.navbar
+            a.logo(href="https://fullstack.cloudconsu.com/RampUP/web_personal/assets/never_compressed.mp4")
+                img.logo-image(src="/assets/new_notas.png" alt="Logo")
+            h1.navbar-title 
+                a(href="/") LOS NOTAS
+            if session.client
+                span.navbar-username= session.client.username
+                a(href="/client/logout") Cerrar Sesión
+            else
+                ul.menu-list
+                    li
+                        a(href="/") Home
+                    li
+                     a(href="/client/login") Iniciar Sesión
+        .body-class
+            form.formulario(action="/client/signup" method="post")
+                label(for="username") Usuario
+                input.input(type="text" name="username" id="username")
+                br
+                label(for="name") Nombre
+                input.input(type="text" name="name" id="name")
+                br
+                label(for="lastname") Apellido
+                input.input(type="text" name="lastname" id="lastname")
+                br
+                label(for="password") Contraseña
+                input.input(type="password" name="password" id="password")
+                br
+                label(for="password_repeat") Repetir contraseña
+                input.input(type="password" name="password_repeat" id="password_repeat")
+                br
+                input.button(type="submit" value="Registrar")
+                if errorMessage
+                    p= errorMessage

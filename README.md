@@ -18,7 +18,6 @@ Las notas tienen;
     3. `docker compose up` para iniciarlo
     4. Acceder en el navegador con el puerto especificado  
 
-**PENDIENTE**
 
 ***
 
@@ -33,7 +32,7 @@ _English_
 The project aims to create a website where registered users can leave notes on a bulletin board, while non-registered users can view the messages.
 ***
 Notes have the following attributes:
-- Title | Maximum length
+- Title | Maximum length 50 characters
 - Content | Maximum 250 characters
 - 1 category
 - Hidden flag | Maximum 10 characters
@@ -48,7 +47,6 @@ Notes have the following attributes:
     4. Access it in the browser using the specified port
 
 
-**PENDING**
 
 ***
 
@@ -63,7 +61,7 @@ _Euskera_
 Proiektuak webgune bat sortzea du helburu, non erregistratutako erabiltzaileek ohar batzuk utzi ditzaten txanpan, erregistratutako erabiltzaileek mezuak ikus ditzaten.
 ***
 Oharrek hurrengo atributuak dute:
-- Izenburua | Gehienezko luzera
+- Izenburua | Gehienezko luzera 50 karaktere
 - Edukia | Gehienez 250 karaktere
 - 1 kategoria
 - Isiltasun bandera | Gehienez 10 karaktere
@@ -79,7 +77,6 @@ Oharrek hurrengo atributuak dute:
     4. Sar zaitez nabigatzailean zehaztutako ataka erabiliz
 
 
-**GAINETIK EGONGO**
 
 ***
 

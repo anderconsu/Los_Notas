@@ -21,7 +21,7 @@
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (10,'Art'),(9,'Books'),(3,'Fashion'),(4,'Food'),(8,'Health'),(7,'Movies'),(6,'Music'),(1,'Sports'),(2,'Technology'),(5,'Travel');
+INSERT INTO `category` VALUES (10,'Arte'),(9,'Libros'),(3,'Moda'),(4,'Comida'),(8,'Salud/Bienestar'),(7,'Películas'),(6,'Música'),(1,'Deportes'),(2,'Tecnología'),(5,'Viajes');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 

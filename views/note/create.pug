@@ -1,16 +1,55 @@
-extends ../layout
-block content
-  form(action="/note/create", method="post")
+doctype html
+html
+    head
+        title Los Notas
+        link(rel="stylesheet" type="text/css" href="/css/style.css")
+    body
+        nav.navbar
+            a.logo(href="/")
+                img.logo-image(src="/assets/new_notas.png" alt="Logo")
+            h1.navbar-title 
+                a(href="/") LOS NOTAS
+            if session.client
+                ul.menu-list
+                    li 
+                        span.navbar-username= session.client.username
+                    li
+                        a(href="/client/logout") Cerrar Sesión
+            else
+                ul.menu-list
+                    li
+                        a(href="/") Home
+                    li
+                        a(href="/client/login") Iniciar Sesión
+                    li
+                        a(href="/client/signup") Registro
+
+form.formulario(action="/note/create" method="post")
     label(for="title") Titulo
-    input(type="text", name="title" id="title")
+    input.input(type="text" name="title" id="title" maxlength="50")
     br
     label(for="content") Contenido
-    input(type="text", name="content" id="content")
+    textarea.textarea(name="content" id="content" rows="6" cols="50" maxlength="250")
     br
     label(for="category_id") Categoria
-    input(type="text", name="category_id" id="category_id")
+    select#category_id(name="category_id")
+        option(value="1") Deportes
+        option(value="2") Tecnología
+        option(value="3") Moda
+        option(value="4") Comida
+        option(value="5") Viajes
+        option(value="6") Música
+        option(value="7") Películas
+        option(value="8") Salud/Bienestar
+        option(value="9") Libros
+        option(value="10") Arte
     br
     label(for="flag") Etiquetas
-    input(type="text", name="flag" id="flag")
+    input.input(type="text" name="flag" id="flag" maxlength="10")
     br
-    input(type="submit", value="Create")
+    input.button(type="submit" value="Create")
+    if errorMessage
+        p= errorMessage
+
+
+

@@ -1,0 +1,73 @@
+doctype html
+html
+    head
+        title Los Notas
+        link(rel="stylesheet" type="text/css" href="/css/style.css")
+    body
+        nav.navbar
+            a.logo(href="https://fullstack.cloudconsu.com/RampUP/web_personal/assets/never_compressed.mp4")
+                img.logo-image(src="/assets/new_notas.png" alt="Logo")
+            h1.navbar-title 
+                a(href="/") LOS NOTAS
+            if session.client
+                ul.menu-list
+                    li 
+                        span.navbar-username= session.client.username
+                    li
+                        a(href="/client/logout") Cerrar Sesión
+            else
+                ul.menu-list
+                    li
+                        a(href="/client/login") Iniciar Sesión
+                    li
+                        a(href="/client/signup") Registro
+
+        nav.submenu-bar
+            ul.submenu-list
+                li
+                    a(href="/note/category/1") Deportes
+                li
+                    a(href="/note/category/2") Tecnología
+                li
+                    a(href="/note/category/3") Moda
+                li
+                    a(href="/note/category/4") Comida
+                li
+                    a(href="/note/category/5") Viajes
+                li
+                    a(href="/note/category/6") Música
+                li
+                    a(href="/note/category/7") Películas
+                li
+                    a(href="/note/category/8") Salud/Bienestar
+                li
+                    a(href="/note/category/9") Libros
+                li
+                    a(href="/note/category/10") Arte
+
+        .body-class
+            .note-cards
+                .note-card
+                    br
+                    br
+                    br
+                    a.agregar(href="/note/create") +
+
+                if notes && notes.length > 0
+                    each note in notes
+                        .note-card(class=`category-${note.category.id}`)
+                            h2 #{note.title}
+                            .content
+                                p #{note.content}
+                                if note.flag
+                                    h5 Flag: #{note.flag}
+                                h5 Categoría: #{note.category.name}
+                            if session.client
+                                .author
+                                    h4= 'Autor: ' + note.client.name + ' ' + note.client.lastname 
+                                    if session.client.id === note.client.id || session.client.rol === 'admin'
+                                        form(action=`note/delete/${note.id}`, method="DELETE")
+                                            button(type="submit") Borrar
+                else
+                    p No hay notas disponibles.
+
