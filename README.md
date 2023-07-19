@@ -18,7 +18,6 @@ Las notas tienen;
     3. `docker compose up` para iniciarlo
     4. Acceder en el navegador con el puerto especificado  
 
-**PENDIENTE**
 
 ***
 
@@ -48,7 +47,6 @@ Notes have the following attributes:
     4. Access it in the browser using the specified port
 
 
-**PENDING**
 
 ***
 
@@ -79,7 +77,6 @@ Oharrek hurrengo atributuak dute:
     4. Sar zaitez nabigatzailean zehaztutako ataka erabiliz
 
 
-**GAINETIK EGONGO**
 
 ***
 
